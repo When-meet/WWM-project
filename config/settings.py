@@ -58,9 +58,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
-    'wwmgroup', 
-    'whenmeet',
+
+    'group',
+    'whenmeet', 
     'wheremeet', 
+    'timetable', 
 ]
 
 MIDDLEWARE = [
@@ -75,15 +77,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,9 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Seoul'  # 한국 시간 적용 
-
-DATETIME_FORMAT =  '%Y-%m-%d'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
