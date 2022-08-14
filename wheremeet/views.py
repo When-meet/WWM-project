@@ -35,7 +35,7 @@ def average(x, y):      #전체 인원 평균 함수
 # 2-2. 서울시 역사마스터 정보.csv dataframe 형태로 저장
 # - 컬럼: 역사_ID, 역사명, 호선, 위도, 경도 
 import pandas as pd 
-df = pd.read_csv ('C:/Users/Hyunwoo/Documents/카카오톡 받은 파일/WWM-project-develop (2)/WWM-project-develop/WWM-project-develop/wheremeet/서울시 역사마스터 정보.csv',encoding='EUC-KR')
+df = pd.read_csv ('/서울시 역사마스터 정보.csv',encoding='EUC-KR')
 
 # 2-3. 행별로 돌리면서 두 점(중간 지점의 위도 경도, 역 위도 경도) 사이의 거리 계산 및 최솟값 구하기 
 from haversine import haversine
