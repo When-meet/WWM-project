@@ -13,9 +13,7 @@
 <body>
   <div class="total">
 
-
     <br>
-
 
     <div class="title-wrap" style="position: relative;z-index:2;">
       <div class="title"></div>
@@ -70,38 +68,60 @@
         document.write("<th>" + day[i] + "</th>");
         for (var j = 0; j <= 23; j++) //열반복
         {
-          console.log(a);
+          var mouseOver = "this.innerHTML=" + '"' + String(timetable[a]) + '"'; 
+          var mouseOut = "this.innerHTML=" + '"' + '"';   
+
           if (timetable[a].length == 0) {
-            document.write("<td bgcolor='white'>");
+            document.write("<td bgcolor='white'>" + "</td>");
           }
           else if (timetable[a].length == 1) {
-            document.write("<td bgcolor='#E1E1FF'>");
+            document.write("<td bgcolor='#E1E1FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 2) {
-            document.write("<td bgcolor='#C8C8FF'>");
+            document.write("<td bgcolor='#C8C8FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 3) {
-            document.write("<td bgcolor='#AFAFFF'>");
+            document.write("<td bgcolor='#AFAFFF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 4) {
-            document.write("<td bgcolor='#9696FF'>");
+            document.write("<td bgcolor='#9696FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 5) {
-            document.write("<td bgcolor='#7D7DFF'>");
+            document.write("<td bgcolor='#7D7DFF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 6) {
-            document.write("<td bgcolor='#6464FF'>");
+            document.write("<td bgcolor='#6464FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 7) {
-            document.write("<td bgcolor='#4B4BFF'>");
+            document.write("<td bgcolor='#4B4BFF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 8) {
-            document.write("<td bgcolor='#3232FF'>");
+            document.write("<td bgcolor='#3232FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           else if (timetable[a].length == 9) {
-            document.write("<td bgcolor='#1919FF'>");
+            document.write("<td bgcolor='#1919FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           } else {
-            document.write("<td bgcolor='#0000FF'>");
+            document.write("<td bgcolor='#0000FF' onmouseover='" + mouseOver + "'" + 
+            "onmouseout='" + mouseOut + "'" +
+            ">" + "</td>");
           }
           // else{
           //     for(var k=1; k<=max_member; k++){

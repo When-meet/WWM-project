@@ -96,9 +96,16 @@ document.querySelector("#modal_Yesbtn").addEventListener("click", function() {
 
 //그룹원 추방 버튼을 눌렀을 때
 document.querySelector("#out-btn").addEventListener("click", function() {
+
+  // var username = {{user_list | safe}};
+  // var count_name = username.length;
+  
   $(".modal").show();
   document.querySelector(".total").classList.toggle("blur");
   document.getElementById("modal_text").innerHTML = "이 그룹원을 추방하시겠습니까?";
+  // for( var i=0;  i<=count_name){
+  //   doucument.getElementById("modal_name").innerHTML=
+  // }
   whichBtn = 1;
 });
 
