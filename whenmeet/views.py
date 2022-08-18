@@ -12,6 +12,8 @@ def post_group_timetable(request,pk):
     if request.method == 'GET':
         date = []
         group = WwmGroup.objects.get(id = pk)
+        user_list = group.user.all()  
+
         start_date = group.startdate
         end_date = group.enddate
         day_count = (end_date - start_date).days + 1
@@ -21,6 +23,7 @@ def post_group_timetable(request,pk):
         timetable = create_group_timetable(pk,start_date,end_date)
         result = get_result(timetable,user_count)
         context = {
+            'user_list': user_list, 
             'groupname': group.groupname,
             'timetable' : timetable, #리스트 형이며 리스트의 요소는 안되는사람의 이름들의 리스트임
             'startdate' : str(start_date), 
