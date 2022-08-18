@@ -25,7 +25,7 @@ def post_group_timetable(request,pk):
             'result_count' : user_count - len(timetable[result[0]]),
             'user_count' : user_count,
         }
-        return render(request,'index.html',context)
+        return render(request,'whenmeet/index.html',context)
 # 1-2. 개인타임 테이블 뿌리는 view -> 시작일을 name = startdate 로 받아야됨
 def post_personal_timetable(request):
     user = User.objects.get(id = '1')
