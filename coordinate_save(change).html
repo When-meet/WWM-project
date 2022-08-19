@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+<!-- //coordinate_save.html hyejin -->
+
 {% load static %}
+<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -92,41 +95,51 @@
             //주소입력칸을 클릭하면
             new daum.Postcode({
               oncomplete: function (data) {
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.getElementById("address_kakao") = data.address; // 주소 넣기
               },
             }).open();
           });
       };
     </script>
-    <script type="text/javascript" src="/static/js/test2.js"></script>
+    <script type="text/javascript" src="/static/js/test.js"></script>
     <script>
       function send_address(e) {
-        const longyy = document.getElementById("lan");
-        const latxx = document.getElementById("lat");
+        var geocoder = new kakao.maps.services.Geocoder();
 
-        coordinate = {
-          address: document.getElementById("start_point").value,
-          latitude: longyy.value,
-          longitude: latxx.value,
-        };
-        console.log(coordinate);
+        geocoder.addressSearch(
+          document.getElementById("address_kakao"),
+          function (result, status) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+              // : kakao.maps.LatLng(latitude, longitude),
 
-        $.ajax({
-          url: "/save-coordinate/",
-          type: "POST",
-          data: JSON.stringify(coordinate),
-          datatype: "json",
-        })
-          .done(function (data) {
-            alert("주소 전송에 성공하였습니다.");
-            window.location.href = "{% url 'wheremeet-result' group.id %}";
-          })
-          .fail(function (data) {
-            alert(
-              "전송 중 서버와의 통신에 문제가 발생하였습니다.\n원인: " +
-                data.reason
-            );
-          });
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+              coordinate = {
+                address: document.getElementById("address_kakao"),
+                latitude: result[0].x,
+                longitude: result[0].y,
+              };
+              $.ajax({
+                url: "/save-coordinate/",
+                type: "POST",
+                data: JSON.stringify(coordinate),
+                datatype: "json",
+              })
+                .done(function (data) {
+                  alert("주소 전송에 성공하였습니다.");
+                  window.location.href =
+                    "{% url 'wheremeet-result' group.id %}";
+                })
+                .fail(function (data) {
+                  alert(
+                    "전송 중 서버와의 통신에 문제가 발생하였습니다.\n원인: " +
+                      data.reason
+                  );
+                });
+            }
+          }
+        );
       }
     </script>
   </body>

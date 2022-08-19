@@ -3,10 +3,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css"/>
   </head>
   <body>
     <div id="header">
@@ -29,8 +29,8 @@
           value=""
           size="50"
         />
-        <input id="lat" type="text" value="" style="display: none" />
-        <input id="lan" type="text" value="" style="display: none" />
+        <input id="lat" type="text" value=""  style="display: none;"/>
+        <input id="lan" type="text" value="" style="display: none;"/> 
       </div>
       <div>
         <input
@@ -39,6 +39,7 @@
           value="중간 지점 찾기"
           onclick="send_address(this)"
         />
+
       </div>
       <div class="modal_wrap">
         <div class="map_wrap">
@@ -76,58 +77,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d69a7a5478026221a062ef69c9c7cb29&libraries=services"
+     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d69a7a5478026221a062ef69c9c7cb29&libraries=services"
     ></script>
-
+     
     <script>
-      $.ajaxSetup({
-        headers: { "X-CSRFToken": "{{csrf_token}}" },
-      });
+        $.ajaxSetup({
+          headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
     </script>
     <script>
-      window.onload = function () {
-        document
-          .getElementById("address_kakao")
-          .addEventListener("click", function () {
-            //주소입력칸을 클릭하면
-            new daum.Postcode({
-              oncomplete: function (data) {
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-              },
-            }).open();
-          });
-      };
+        window.onload = function(){
+            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    }
+                }).open();
+            });
+        }
     </script>
     <script type="text/javascript" src="/static/js/test2.js"></script>
     <script>
-      function send_address(e) {
-        const longyy = document.getElementById("lan");
-        const latxx = document.getElementById("lat");
-
-        coordinate = {
-          address: document.getElementById("start_point").value,
-          latitude: longyy.value,
-          longitude: latxx.value,
-        };
-        console.log(coordinate);
-
-        $.ajax({
-          url: "/save-coordinate/",
-          type: "POST",
-          data: JSON.stringify(coordinate),
-          datatype: "json",
-        })
-          .done(function (data) {
-            alert("주소 전송에 성공하였습니다.");
-            window.location.href = "{% url 'wheremeet-result' group.id %}";
-          })
-          .fail(function (data) {
-            alert(
-              "전송 중 서버와의 통신에 문제가 발생하였습니다.\n원인: " +
-                data.reason
-            );
-          });
+       function send_address(e) {
+    
+      const longyy = document.getElementById("lan");
+      const latxx = document.getElementById("lat");
+  
+      coordinate = {
+        'address': document.getElementById("start_point").value, 
+        'latitude': longyy.value, 
+        'longitude': latxx.value
       }
+      console.log(coordinate);
+    
+    $.ajax({
+        url: "/save-coordinate/" ,
+        type: 'POST',
+        data: JSON.stringify(coordinate),
+        datatype: 'json',
+     
+    }).done(function (data) {
+        alert("주소 전송에 성공하였습니다.");
+        window.location.href = "{% url 'wheremeet-result' group.id %}";
+    }).fail(function (data) {
+        alert("전송 중 서버와의 통신에 문제가 발생하였습니다.\n원인: " + data.reason);
+    })
+    
+  
+  }
     </script>
   </body>
 </html>

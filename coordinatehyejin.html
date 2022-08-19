@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+<!-- //coordinate_save.html hyejin -->
+
 {% load static %}
+<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -98,7 +101,7 @@
           });
       };
     </script>
-    <script type="text/javascript" src="/static/js/test2.js"></script>
+    <script type="text/javascript" src="/static/js/test.js"></script>
     <script>
       function send_address(e) {
         const longyy = document.getElementById("lan");
@@ -106,8 +109,8 @@
 
         coordinate = {
           address: document.getElementById("start_point").value,
-          latitude: longyy.value,
-          longitude: latxx.value,
+          latitude: latxx.value,
+          longitude: longyy.value,
         };
         console.log(coordinate);
 
