@@ -49,6 +49,13 @@ ALLOWED_HOSTS = ["port-0-wwm-project-13082024l70nufe3.gksl1.cloudtype.app"]
 
 SITE_ID=1
 
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
