@@ -8,19 +8,22 @@ from accounts.models import User
 from datetime import timedelta, datetime
 import json
 
-def post_group_timetable(request,pk):
+def post_group_timetable(request,group_url):
     if request.method == 'GET':
         date = []
-        group = WwmGroup.objects.get(id = pk)
+        group = WwmGroup.objects.get(wwmgroupurl=group_url)
+        user_list = group.user.all()  
+
         start_date = group.startdate
         end_date = group.enddate
         day_count = (end_date - start_date).days + 1
         for single_date in (start_date + timedelta(n) for n in range(day_count)):
             date.append(str(single_date))
         user_count = len([user for user in group.user.all()])
-        timetable = create_group_timetable(pk,start_date,end_date)
+        timetable = create_group_timetable(group.pk,start_date,end_date)
         result = get_result(timetable,user_count)
         context = {
+            'user_list': user_list, 
             'groupname': group.groupname,
             'timetable' : timetable, #리스트 형이며 리스트의 요소는 안되는사람의 이름들의 리스트임
             'startdate' : str(start_date), 
@@ -29,8 +32,11 @@ def post_group_timetable(request,pk):
             'result_list' : result,
             'result_count' : user_count - len(timetable[result[0]]),
             'user_count' : user_count,
+            "wwmgroupurl": group.wwmgroupurl,
+            "laeder_email": group.leader_email,
+            "user_email": request.user.email,
         }
-        return render(request,'index.html',context)
+        return render(request,'whenmeet/index.html',context)
 # 1-2. 개인타임 테이블 뿌리는 view -> 시작일을 name = startdate 로 받아야됨
 def post_personal_timetable(request):
     user = User.objects.get(id = '1')
@@ -53,6 +59,7 @@ def post_personal_timetable(request):
             'enddate' : enddate,
             'date' : date,
     }
+
     return render(request,'whenmeet/mytimetable.html',context)
 # 2-1. 그룹원들 타임 테이블 취합하는 view 
 # - wwmgroup modeld의 avaliablity_cal_length 속성 사용 
@@ -80,7 +87,7 @@ def create_group_timetable(group_id,start_date,end_date):
         timetables.append(formatted_time)
     binds = list(map(list,zip(*timetables)))
     for bind in binds:
-        timetable.append([users[i] for i in range(len(bind)) if bind[i]=='0'])
+        timetable.append([users[i] for i in range(len(bind)) if bind[i]=='1'])
     return timetable
 
 @csrf_exempt
