@@ -46,7 +46,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["port-0-wwm-project-13082024l70nufe3.gksl1.cloudtype.app"]
 
-
 SITE_ID=1
 
 
