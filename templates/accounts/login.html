@@ -18,9 +18,13 @@
     <h1>로그인</h1>
     <div id="ball"></div>
     <div class="container">
-        <form action="{% provider_login_url 'google' %}" method="post">
+        <form action="{% url 'account:login' %}" method="post">
             {% csrf_token %}
-            <button id="box" type="submit" style="display: block"><img id= "img" src="{% static 'img/google.png' %}"></button>
+            <input type="text" name="username" id="username">
+            <input type="text" name="password1" id="password1">
+            <input type="text" name="password2" id="password2">
+
+            <button id="box" type="submit" style="display: block">로그인</button>
         </form>
     </div>
     <div id="ball2"></div>

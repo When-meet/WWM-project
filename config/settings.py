@@ -62,14 +62,6 @@ INSTALLED_APPS = [
     'wwmgroup', 
     'whenmeet',
     'wheremeet',
-
-    #allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    #provider
-    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -116,17 +108,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', # engine: mysql
+#         'NAME' : 'wwmdb', # DB Name
+#         'USER' : 'admin', # DB User
+#         'PASSWORD' : 'qwer1234!', # Password
+#         'HOST': 'wwm-db.c7gdpewqzikb.us-east-2.rds.amazonaws.com', # 생성한 데이터베이스 엔드포인트
+#         'PORT': '3306', # 데이터베이스 포트
+#         'OPTIONS':{
+#             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # engine: mysql
-        'NAME' : 'wwmdb', # DB Name
-        'USER' : 'admin', # DB User
-        'PASSWORD' : 'qwer1234!', # Password
-        'HOST': 'wwm-db.c7gdpewqzikb.us-east-2.rds.amazonaws.com', # 생성한 데이터베이스 엔드포인트
-        'PORT': '3306', # 데이터베이스 포트
-        'OPTIONS':{
-            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -173,32 +172,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = [
-
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-
-]
-
 AUTH_USER_MODEL = 'accounts.User'
 
 SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email', #저는 email 주소 정보도 받아오고 싶어서 추가해줬습니다
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online'
-        }
-    }
-}
-
 LOGIN_REDIRECT_URL = '/accounts/my_home'  # 로그인 후 리다이렉트 될 경로
-
-ACCOUNT_LOGOUT_ON_GET = True

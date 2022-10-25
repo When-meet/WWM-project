@@ -25,6 +25,5 @@ urlpatterns = [
     path('',accounts.views.home, name = "home"),
     path('', include('wheremeet.urls')),
     path('accounts/', include('accounts.urls')),
-    path('auth/', include('allauth.urls')),
     path('wwmgroup/', include('wwmgroup.urls')),
 ]
